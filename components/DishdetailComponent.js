@@ -23,7 +23,7 @@ function RenderDish(props) {
     }
 }
 
-class DishDetail extends Component {
+class Dishdetail extends Component {
 
     constructor(props) {
         super(props);
@@ -32,12 +32,8 @@ class DishDetail extends Component {
         };
     }
 
-    static navigationOptions = {
-        title: 'Dish Details'
-    };
-
     render() {
-        const dishId = this.props.navigation.getParam('dishId', '');
+        const dishId = this.props.route.params.dishId;
         return (
             <RenderDish dish={this.state.dishes[+dishId]} />
         );
