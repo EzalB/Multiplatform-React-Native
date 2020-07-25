@@ -24,13 +24,14 @@ class Menu extends Component {
     render() {
         const renderMenuItem = ({ item, index }) => {
             return (
-                <Tile
+                <ListItem
                     key={index}
                     title={item.name}
-                    caption={item.description}
-                    featured
+                    subtitle={item.description}
+                    hideChevron={true}
                     onPress={() => navigate('Dishdetail', { dishId: item.id })}
-                    imageSrc={{ uri: baseUrl + item.image }}
+                    leftAvatar={{ source: { uri: baseUrl + item.image } }}
+                    chevron
                 />
             );
         }

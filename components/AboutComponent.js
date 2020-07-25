@@ -13,13 +13,6 @@ const mapStateToProps = state => {
 
 class About extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            leaders: LEADERS
-        };
-    }
-
     render() {
 
         const renderLeaders = ({ item, index }) => {
@@ -51,7 +44,7 @@ class About extends Component {
                 <Card title='Corporate Leadership'>
                     <FlatList
                         data={this.props.leaders.leaders}
-                        renderItem={renderLeader}
+                        renderItem={renderLeaders}
                         keyExtractor={item => item.id.toString()}
                     />
                 </Card>

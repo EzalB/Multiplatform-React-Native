@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, FlatList } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
+import { connect } from 'react-redux';
 import { DISHES } from '../shared/dishes';
 import { COMMENTS } from '../shared/comments';
-import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 
 const mapStateToProps = state => {
@@ -94,4 +94,4 @@ class Dishdetail extends Component {
     }
 }
 
-export default connect(mapStateToProps)(DishDetail);
+export default connect(mapStateToProps)(Dishdetail);
