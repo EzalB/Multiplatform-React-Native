@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View, Image, StyleSheet } from 'react-native';
+import { ScrollView, Text, View, Image, StyleSheet, Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator, DrawerItemList } from '@react-navigation/drawer';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
+import Constants from "expo-constants";
 import { fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
 
 import Home from './HomeComponent';
@@ -33,7 +34,7 @@ const MenuNavigator = createStackNavigator();
 
 const HeaderOptions = {
     headerStyle: {
-        backgroundColor: "#512DA8"
+        backgroundColor: "#008080"
     },
     headerTintColor: "#fff",
     headerTitleStyle: {
@@ -195,7 +196,7 @@ function MainNavigatorDrawer() {
         <MainNavigator.Navigator
             initialRouteName="Home"
             drawerStyle={{
-                backgroundColor: '#D1C4E9'
+                backgroundColor: '#eee'
             }}
             drawerContent={props => <CustomDrawerContentComponent {...props} />}
         >
@@ -270,9 +271,17 @@ class Main extends Component {
 
     render() {
         return (
-            <NavigationContainer>
-                <MainNavigatorDrawer />
-            </NavigationContainer>
+            <View
+                style={{
+                    flex: 1,
+                    paddingTop:
+                        Platform.OS === "ios" ? 0 : Constants.statusBarHeight,
+                }}
+            >
+                <NavigationContainer>
+                    <MainNavigatorDrawer />
+                </NavigationContainer>
+            </View>
         );
     }
 }
@@ -282,7 +291,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     drawerHeader: {
-        backgroundColor: '#512DA8',
+        backgroundColor: '#008080',
         height: 140,
         alignItems: 'center',
         justifyContent: 'center',

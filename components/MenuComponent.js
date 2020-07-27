@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { View, FlatList } from 'react-native';
 import { DISHES } from '../shared/dishes';
-import { Tile } from 'react-native-elements';
+import { ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
+import { Text } from 'react-native';
 import { Loading } from './LoadingComponent';
 
 const mapStateToProps = state => {
@@ -15,13 +16,6 @@ const mapStateToProps = state => {
 
 class Menu extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            dishes: DISHES
-        };
-    }
-
     render() {
         const renderMenuItem = ({ item, index }) => {
             return (
@@ -32,7 +26,6 @@ class Menu extends Component {
                     hideChevron={true}
                     onPress={() => navigate('Dishdetail', { dishId: item.id })}
                     leftAvatar={{ source: { uri: baseUrl + item.image } }}
-                    chevron
                 />
             );
         }
