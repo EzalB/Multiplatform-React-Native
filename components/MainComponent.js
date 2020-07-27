@@ -303,7 +303,6 @@ function MainNavigatorDrawer() {
                             type='font-awesome'
                             size={24}
                             color={color}
-                            paddingLeft={10}
                         />
                     )
                 }}
@@ -340,7 +339,7 @@ class Main extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        margin: 10,
+        margin: 2,
     },
     drawerHeader: {
         backgroundColor: '#008080',
