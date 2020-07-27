@@ -14,6 +14,7 @@ import Menu from './MenuComponent';
 import Dishdetail from './DishdetailComponent';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
+import Reservation from './ReservationComponent';
 
 const mapStateToProps = state => {
     return {
@@ -191,6 +192,35 @@ function AboutUsNavigatorScreen() {
     )
 }
 
+const ReservationNavigator = createStackNavigator();
+function ReservationNavigatorScreen() {
+    return (
+        <ReservationNavigator.Navigator
+            initialRouteName='Reservation'
+            screenOptions={HeaderOptions}
+        >
+            <ReservationNavigator.Screen
+                name="Reservation"
+                component={Reservation}
+                options={
+                    ({ navigation }) => ({
+                        headerLeft: () => (
+                            <Icon
+                                name='reservation'
+                                size={24}
+                                color='white'
+                                onPress={() =>
+                                    navigation.toggleDrawer()}
+                            />
+                        )
+
+                    })
+                }
+            />
+        </ReservationNavigator.Navigator>
+    );
+}
+
 const MainNavigator = createDrawerNavigator();
 function MainNavigatorDrawer() {
     return (
@@ -255,6 +285,21 @@ function MainNavigatorDrawer() {
                     drawerIcon: ({ color }) => (
                         <Icon
                             name='info'
+                            type='font-awesome'
+                            size={24}
+                            color={color}
+                            paddingLeft={10}
+                        />
+                    )
+                }}
+            />
+            <MainNavigator.Screen
+                name="Reserve Table"
+                component={ReservationNavigatorScreen}
+                options={{
+                    drawerIcon: ({ color }) => (
+                        <Icon
+                            name='cutlery'
                             type='font-awesome'
                             size={24}
                             color={color}
