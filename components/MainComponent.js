@@ -6,6 +6,7 @@ import { createDrawerNavigator, DrawerItemList } from '@react-navigation/drawer'
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Constants from "expo-constants";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
 
 import Home from './HomeComponent';
@@ -45,20 +46,20 @@ const HeaderOptions = {
 //Custom Drawer
 const CustomDrawerContentComponent = (props) => (
     <ScrollView>
-        <View style={styles.drawerHeader}>
-            <View style={{ flex: 1 }}>
-                <Image
-                    source={require('./images/logo.png')}
-                    style={styles.drawerImage}
-                />
+        <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
+            <View style={styles.drawerHeader}>
+                <View style={{ flex: 1 }}>
+                    <Image
+                        source={require('./images/logo.png')}
+                        style={styles.drawerImage}
+                    />
+                </View>
+                <View style={{ flex: 2 }}>
+                    <Text style={styles.drawerHeaderText}>Ristorante Con Fusion</Text>
+                </View>
             </View>
-            <View style={{ flex: 2 }}>
-                <Text style={styles.drawerHeaderText}>
-                    Ristorante Con Fusion
-                </Text>
-            </View>
-        </View>
-        <DrawerItemList {...props} />
+            <DrawerItemList {...props} />
+        </SafeAreaView>
     </ScrollView>
 );
 
@@ -199,17 +200,21 @@ function MainNavigatorDrawer() {
                 backgroundColor: '#eee'
             }}
             drawerContent={props => <CustomDrawerContentComponent {...props} />}
+            drawerContentOptions={{
+                activeTintColor: "#008080",
+
+            }}
         >
             <MainNavigator.Screen
                 name="Home"
                 component={HomeNavigatorScreen}
                 options={{
-                    drawerIcon: ({ tintColor }) => (
+                    drawerIcon: ({ color }) => (
                         <Icon
                             name='home'
                             type='font-awesome'
                             size={24}
-                            color={tintColor}
+                            color={color}
                         />
                     )
                 }}
@@ -219,12 +224,12 @@ function MainNavigatorDrawer() {
                 name="Contact Us"
                 component={ContactNavigatorScreen}
                 options={{
-                    drawerIcon: ({ tintColor }) => (
+                    drawerIcon: ({ color }) => (
                         <Icon
                             name='address-card'
                             type='font-awesome'
                             size={22}
-                            color={tintColor}
+                            color={color}
                         />
                     )
                 }}
@@ -233,12 +238,12 @@ function MainNavigatorDrawer() {
                 name="Menu"
                 component={MenuNavigatorScreen}
                 options={{
-                    drawerIcon: ({ tintColor }) => (
+                    drawerIcon: ({ color }) => (
                         <Icon
                             name='list'
                             type='font-awesome'
                             size={24}
-                            color={tintColor}
+                            color={color}
                         />
                     )
                 }}
@@ -247,12 +252,13 @@ function MainNavigatorDrawer() {
                 name="About Us"
                 component={AboutUsNavigatorScreen}
                 options={{
-                    drawerIcon: ({ tintColor }) => (
+                    drawerIcon: ({ color }) => (
                         <Icon
-                            name='info-circle'
+                            name='info'
                             type='font-awesome'
                             size={24}
-                            color={tintColor}
+                            color={color}
+                            paddingLeft={10}
                         />
                     )
                 }}
@@ -289,6 +295,7 @@ class Main extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        margin: 10,
     },
     drawerHeader: {
         backgroundColor: '#008080',
