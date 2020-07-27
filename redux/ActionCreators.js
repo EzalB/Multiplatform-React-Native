@@ -1,6 +1,8 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
+
+//Comments
 export const fetchComments = () => (dispatch) => {
     return fetch(baseUrl + 'comments')
         .then(response => {
@@ -31,6 +33,8 @@ export const addComments = (comments) => ({
     payload: comments
 });
 
+
+//Dishes
 export const fetchDishes = () => (dispatch) => {
 
     dispatch(dishesLoading());
@@ -68,6 +72,8 @@ export const addDishes = (dishes) => ({
     payload: dishes
 });
 
+
+//Promos
 export const fetchPromos = () => (dispatch) => {
 
     dispatch(promosLoading());
@@ -105,6 +111,8 @@ export const addPromos = (promos) => ({
     payload: promos
 });
 
+
+//Leaders
 export const fetchLeaders = () => (dispatch) => {
 
     dispatch(leadersLoading());
@@ -140,4 +148,19 @@ export const leadersFailed = (errmess) => ({
 export const addLeaders = (leaders) => ({
     type: ActionTypes.ADD_LEADERS,
     payload: leaders
+});
+
+
+//Favorites
+export const postFavorite = (dishId) => (dispatch) => {
+
+    setTimeout(() => {
+        dispatch(addFavorite(dishId));
+    }, 2000);
+};
+
+
+export const addFavorite = (dishId) => ({
+    type: ActionTypes.ADD_FAVORITE,
+    payload: dishId
 });
