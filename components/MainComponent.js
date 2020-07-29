@@ -15,6 +15,7 @@ import Dishdetail from './DishdetailComponent';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
 import Reservation from './ReservationComponent';
+import Favorites from './FavoriteComponent';
 
 const mapStateToProps = state => {
     return {
@@ -116,8 +117,7 @@ function HomeNavigatorScreen() {
                                 name='menu'
                                 size={24}
                                 color='white'
-                                onPress={() =>
-                                    navigation.toggleDrawer()}
+                                onPress={() => navigation.toggleDrawer()}
                             />
                         )
 
@@ -146,8 +146,7 @@ function ContactNavigatorScreen() {
                                 name='menu'
                                 size={24}
                                 color='white'
-                                onPress={() =>
-                                    navigation.toggleDrawer()}
+                                onPress={() => navigation.toggleDrawer()}
                             />
                         )
 
@@ -199,13 +198,13 @@ function ReservationNavigatorScreen() {
             screenOptions={HeaderOptions}
         >
             <ReservationNavigator.Screen
-                name="Reservation"
+                name="Reserve Table"
                 component={Reservation}
                 options={
                     ({ navigation }) => ({
                         headerLeft: () => (
                             <Icon
-                                name='reservation'
+                                name='menu'
                                 size={24}
                                 color='white'
                                 onPress={() => navigation.toggleDrawer()}
@@ -216,6 +215,35 @@ function ReservationNavigatorScreen() {
                 }
             />
         </ReservationNavigator.Navigator>
+    );
+}
+
+
+const FavoritesNavigator = createStackNavigator();
+function FavoritesNavigatorScreen() {
+    return (
+        <FavoritesNavigator.Navigator
+            initialRouteName='Favorite'
+            screenOptions={HeaderOptions}
+        >
+            <FavoritesNavigator.Screen
+                name="Favorite"
+                component={Favorites}
+                options={
+                    ({ navigation }) => ({
+                        headerLeft: () => (
+                            <Icon
+                                name='menu'
+                                size={24}
+                                color='white'
+                                onPress={() => navigation.toggleDrawer()}
+                            />
+                        )
+
+                    })
+                }
+            />
+        </FavoritesNavigator.Navigator>
     );
 }
 
@@ -303,6 +331,22 @@ function MainNavigatorDrawer() {
                             size={24}
                             color={color}
                             paddingLeft={2}
+                        />
+                    )
+                }}
+            />
+            <MainNavigator.Screen
+                name="My Favorites"
+                drawerLabel="My Favorites"
+                component={FavoritesNavigatorScreen}
+                options={{
+                    drawerIcon: ({ color }) => (
+                        <Icon
+                            name='heart'
+                            type='font-awesome'
+                            size={24}
+                            color={color}
+
                         />
                     )
                 }}
