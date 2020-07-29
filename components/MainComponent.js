@@ -165,8 +165,7 @@ const MenuIcon = (props) => {
             name='menu'
             size={24}
             color='white'
-            onPress={() =>
-                props.navigation.toggleDrawer()}
+            onPress={() => props.navigation.toggleDrawer()}
         />
     );
 }
@@ -209,8 +208,7 @@ function ReservationNavigatorScreen() {
                                 name='reservation'
                                 size={24}
                                 color='white'
-                                onPress={() =>
-                                    navigation.toggleDrawer()}
+                                onPress={() => navigation.toggleDrawer()}
                             />
                         )
 
@@ -245,6 +243,7 @@ function MainNavigatorDrawer() {
                             type='font-awesome'
                             size={24}
                             color={color}
+                            paddingLeft={5}
                         />
                     )
                 }}
@@ -288,7 +287,7 @@ function MainNavigatorDrawer() {
                             type='font-awesome'
                             size={24}
                             color={color}
-                            paddingLeft={10}
+                            paddingLeft={13}
                         />
                     )
                 }}
@@ -303,6 +302,7 @@ function MainNavigatorDrawer() {
                             type='font-awesome'
                             size={24}
                             color={color}
+                            paddingLeft={2}
                         />
                     )
                 }}
@@ -339,7 +339,6 @@ class Main extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        margin: 2,
     },
     drawerHeader: {
         backgroundColor: '#008080',

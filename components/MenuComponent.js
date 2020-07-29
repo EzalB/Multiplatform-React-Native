@@ -13,7 +13,6 @@ const mapStateToProps = state => {
     }
 }
 
-
 class Menu extends Component {
 
     render() {
