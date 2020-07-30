@@ -7,8 +7,6 @@ import { Loading } from './components/LoadingComponent';
 
 const { persistor, store } = ConfigureStore();
 
-const store = ConfigureStore();
-
 export default class App extends React.Component {
   render() {
     return (
