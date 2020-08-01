@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Platform, Text, ScrollView, Image, StyleSheet, NetInfo, ToastAndroid } from 'react-native';
+import { View, Platform, Text, ScrollView, Image, StyleSheet, ToastAndroid } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator, DrawerItemList } from '@react-navigation/drawer';
@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import Constants from "expo-constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { fetchDishes, fetchComments, fetchPromos, fetchLeaders } from '../redux/ActionCreators';
+import NetInfo from '@react-native-community/netinfo';
 
 import Home from './HomeComponent';
 import Menu from './MenuComponent';
@@ -404,18 +405,16 @@ class Main extends Component {
         this.props.fetchPromos();
         this.props.fetchLeaders();
 
-        NetInfo.getConnectionInfo()
-            .then((connectionInfo) => {
-                ToastAndroid.show('Initial Network Connectivity Type: '
-                    + connectionInfo.type + ', effectiveType: ' + connectionInfo.effectiveType,
-                    ToastAndroid.LONG)
-            });
+        NetInfo.fetch().then((connectionInfo) => {
+            ToastAndroid.show('Initial Network Connectivity Type: '
+                + connectionInfo.type, ToastAndroid.LONG)
+        });
 
-        NetInfo.addEventListener('connectionChange', this.handleConnectivityChange);
+        NetInfo.addEventListener(connectionChange => this.handleConnectivityChange(connectionChange))
     }
 
     componentWillUnmount() {
-        NetInfo.removeEventListener('connectionChange', this.handleConnectivityChange);
+        NetInfo.removeEventListener(connectionChange => this.handleConnectivityChange(connectionChange))
     }
 
     handleConnectivityChange = (connectionInfo) => {

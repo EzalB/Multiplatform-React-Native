@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, ScrollView, Image } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, Image, TabBarIOS } from 'react-native';
 import { Input, CheckBox, Button, Icon } from 'react-native-elements';
 import { SecureStore, Camera, Permissions, ImagePicker, Asset, ImageManipulator } from 'expo';
-import { createBottomTabNavigator } from 'react-navigation';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { baseUrl } from '../shared/baseUrl';
 
 class LoginTab extends Component {
@@ -302,16 +303,52 @@ const styles = StyleSheet.create({
     }
 });
 
-const Login = createBottomTabNavigator({
-    Login: LoginTab,
-    Register: RegisterTab
-}, {
-    tabBarOptions: {
-        activeBackgroundColor: '#9575CD',
-        inactiveBackgroundColor: '#D1C4E9',
-        activeTintColor: '#ffffff',
-        inactiveTintColor: 'gray'
-    }
-});
+const tabNavigator = createBottomTabNavigator();
+
+function Login() {
+    return (
+        <NavigationContainer independent={true}>
+            <tabNavigator.Navigator
+                initialRouteName='Login'
+                tabBarOptions={{
+                    activeBackgroundColor: '#9575CD',
+                    inactiveBackgroundColor: '#D1C4E9',
+                    activeTintColor: '#ffffff',
+                    inactiveTintColor: 'gray'
+                }}>
+                <tabNavigator.Screen
+                    name='Login'
+                    component={LoginTab}
+                    options={{
+                        title: 'Login',
+                        tabBarIcon: ({ tintColor }) => (
+                            <Icon
+                                name='sign-in'
+                                type='font-awesome'
+                                size={24}
+                                iconStyle={{ color: tintColor }}
+                            />
+                        )
+                    }}
+                />
+                <tabNavigator.Screen
+                    name='Register'
+                    component={RegisterTab}
+                    options={{
+                        title: 'Register',
+                        tabBarIcon: ({ tintColor }) => (
+                            <Icon
+                                name='user-plus'
+                                type='font-awesome'
+                                size={24}
+                                iconStyle={{ color: tintColor }}
+                            />
+                        )
+                    }}
+                />
+            </tabNavigator.Navigator>
+        </NavigationContainer>
+    );
+}
 
 export default Login;
